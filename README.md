@@ -1,20 +1,25 @@
 ## Introducción
 
-## PIPENV
+### PIPENV
+#### **Instalación**
+`pip install pipenv`
 
-Instalación
+#### **Instalación de librerias**
+`pipenv install`
 
-pip install pipenv
+#### **Activar virtualenv**
+`pipenv shell`
 
-Instalación de librerias
-pipenv install
+#### **Verificar librerias instaladas**
+`pipenv graph`
 
-Activar virtualenv
-pipenv shell
+## Precommit
+#### **Ejecutar pre-commit (Formato | Linter)**
+`pre-commit run --all-files`
 
-Verificar librerias instaladas
-pipenv graph
+### Django
+#### **Ejecución**
+`python manage.py runserver`
 
-## Precommit All
-
-pre-commit run --all-files
+#### **Testing**
+`python manage.py test`
