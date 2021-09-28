@@ -1,0 +1,50 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:11.6
+    environment:
+      - POSTGRES_DB=spaceag_challenge
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysql
+    ports:
+      - "5432:5432"
+    networks:
+      - database_network
+  web:
+    environment:
+      - DJANGO_ENVIROMENT=production
+      - DJANGO_SETTINGS_MODULE=spaceag_restapi.settings
+      - SECRET_KEY=django-insecure-xqjiu3oda+*zz0bbd1*73m#na35q6tqjxm_0^ro7#m%6_u6ah0
+      - DEBUG=True
+      - DATABASE_NAME=spaceag_challenge
+      - DATABASE_USER=postgres
+      - DATABASE_PASS=mysql
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+    build: .
+    command: >
+      sh -c "pipenv run python manage.py migrate &&
+             pipenv run gunicorn spaceag_restapi.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - nginx_network
+      - database_network
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    networks:
+      - nginx_network
+
+networks:
+  nginx_network:
+    driver: bridge
+  database_network:
+    driver: bridge

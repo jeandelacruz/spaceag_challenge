@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 import sys
 from dotenv import read_dotenv
+from os import environ
 
 
 def main():
     # Enviroment
-    read_dotenv()
+    if environ.get('DJANGO_ENVIROMENT') == 'development':
+        read_dotenv()
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
