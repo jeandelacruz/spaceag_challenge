@@ -1,0 +1,27 @@
+[tool.black]
+line-length=110
+skip-string-normalization = true
+target-version=['py38']
+experimental-string-processing = true
+exclude = '''
+/(
+    /.git
+  | /.mypy_cache
+)/
+'''
+disable = """
+    line-too-long,
+    abstract-method,
+    no-member,
+"""
+enable = "useless-suppression"
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length=110
+multi_line_output = 3
+include_trailing_comma=true
+default_section = "THIRDPARTY"
+known_first_party = []
+known_third_party = []
