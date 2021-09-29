@@ -3,7 +3,7 @@ from dotenv import read_dotenv
 
 from django.core.wsgi import get_wsgi_application
 
-if os.environ.get('DJANGO_ENVIROMENT') == 'development':
+if os.getenv('DJANGO_ENVIROMENT') == 'development':
     read_dotenv(
         os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
     )
