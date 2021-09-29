@@ -15,27 +15,27 @@ class TestViews(TestSetUp):
     def _worker_list_create(self, nro_workers, page):
         for _ in range(nro_workers):
             self.client.post(
-                self.create_url, self.worker_data, format='json'
+                self.list_create_url, self.worker_data, format='json'
             )
-        result = self.client.get(self.list_url, {'page': page})
+        result = self.client.get(self.list_create_url, {'page': page})
         self.assertEqual(result.status_code, 200)
         return result
 
     def test_worker_create(self):
         res = self.client.post(
-            self.create_url, self.worker_data, format='json'
+            self.list_create_url, self.worker_data, format='json'
         )
         serializer = self.serializer(instance=res.data)
         self.assertEqual(res.data, serializer.data)
 
     def test_worker_update(self):
         create = self.client.post(
-            self.create_url, self.worker_data, format='json'
+            self.list_create_url, self.worker_data, format='json'
         )
         serializer_create = self.serializer(instance=create.data)
         res_update = self.client.patch(
             reverse_lazy(
-                'worker_update',
+                'update_destroy',
                 kwargs={'id': serializer_create.data['id']},
             ),
             json=self.worker_update,
@@ -47,12 +47,12 @@ class TestViews(TestSetUp):
 
     def test_worker_delete(self):
         create = self.client.post(
-            self.create_url, self.worker_data, format='json'
+            self.list_create_url, self.worker_data, format='json'
         )
         serializer_create = self.serializer(instance=create.data)
         res_delete = self.client.delete(
             reverse_lazy(
-                'worker_delete',
+                'update_destroy',
                 kwargs={'id': serializer_create.data['id']},
             ),
             format='json',

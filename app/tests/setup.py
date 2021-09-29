@@ -24,8 +24,7 @@ class TestSetUp(APITestCase):
             'last_name': self.faker.name().split(' ')[1],
             'function': choice(self.functions_choices),
         }
-        self.list_url = reverse_lazy('worker_list')
-        self.create_url = reverse_lazy('worker_create')
+        self.list_create_url = reverse_lazy('list_create')
         self.serializer = WorkerSerializer
 
     def tearDown(self):
