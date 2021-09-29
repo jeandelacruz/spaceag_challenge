@@ -1,20 +1,10 @@
 from django.contrib import admin
 from django.urls import path, include
-from drf_yasg import openapi, views
-
-schema_view = views.get_schema_view(
-    openapi.Info(
-        title='SpaceAG Challenge',
-        default_version='v1',
-        description='RestAPI Reto SpaceAG',
-        contact=openapi.Contact(email='jdelacruzcr94@gmail.com'),
-    ),
-    public=True,
-)
+from .openapi import schema_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('field_workers/', include('app.urls')),
+    path('v1/field_workers/', include('app.urls')),
     path(
         '',
         schema_view.with_ui('swagger', cache_timeout=0),

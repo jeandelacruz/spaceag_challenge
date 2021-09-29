@@ -20,6 +20,10 @@
 
 ## Precommit
 
+#### **Instalación (Se debe tener inicializado git previamente)**
+
+`pre-commit install`
+
 #### **Ejecutar pre-commit (Formato | Linter)**
 
 `pre-commit run --all-files`
@@ -42,7 +46,7 @@
 
 #### **Up**
 
-`docker-compose up`
+`docker-compose up -d`
 
 ### Enter APP
 
