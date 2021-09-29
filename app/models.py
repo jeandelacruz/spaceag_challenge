@@ -20,9 +20,11 @@ class TimeStampMixin(models.Model):
 # Create your models here.
 class Worker(TimeStampMixin):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    first_name = models.TextField()
-    last_name = models.TextField()
-    function = models.TextField(choices=functions_choices, default='Other')
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    function = models.CharField(
+        max_length=255, choices=functions_choices, default='Other'
+    )
 
     class Meta:
         db_table = 'workers'
