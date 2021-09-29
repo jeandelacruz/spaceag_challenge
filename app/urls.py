@@ -1,22 +1,15 @@
 from django.urls import path
-from .views import (
-    WorkerListView,
-    WorkerCreateView,
-    WorkerUpdateView,
-    WorkerDeleteView,
-)
+from .views import WorkerViewSet
 
 urlpatterns = [
-    path('', WorkerListView.as_view(), name='worker_list'),
-    path('create', WorkerCreateView.as_view(), name='worker_create'),
     path(
-        'update/<uuid:id>',
-        WorkerUpdateView.as_view(),
-        name='worker_update',
+        '',
+        WorkerViewSet.as_view({'get': 'list', 'post': 'create'}),
+        name='list_create',
     ),
     path(
-        'delete/<uuid:id>',
-        WorkerDeleteView.as_view(),
-        name='worker_delete',
+        '<uuid:id>',
+        WorkerViewSet.as_view({'patch': 'update', 'delete': 'destroy'}),
+        name='update_destroy',
     ),
 ]
